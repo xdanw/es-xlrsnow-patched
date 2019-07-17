@@ -1,0 +1,13 @@
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.xebialabs.com/deployit/ui-plugin"
+        xsi:schemaLocation="http://www.xebialabs.com/deployit/ui-plugin xl-ui-plugin.xsd">
+
+    <menu-ref ref="xlrelease.menu.Main">
+    	<menu-ref ref="xlrelease.menu.Releases" >
+            <menu-item label="ES Release Overview"  weight="15" path-suffix="es/releases" uri="include/es/releases.html">
+            </menu-item>
+        </menu-ref>
+    </menu-ref>
+
+     <library name="es.release.report"/>
+</plugin>

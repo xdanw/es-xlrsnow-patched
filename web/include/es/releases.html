@@ -1,0 +1,13 @@
+
+<div ng-controller="es.ReleaseViewController as esReleaseViewController" >
+
+    <div data-ng-if="!esReleaseViewController.loading && esReleaseViewController.hasRecords" ui-grid="esReleaseViewController.gridOptions"  class="grid-container release-line"/>  
+
+    <div data-ng-if="!esReleaseViewController.loading && !esReleaseViewController.hasRecords" >
+    	No releases found
+    </div>  
+
+    <div data-ng-if="esReleaseViewController.loading" class="spinner" style="text-align: center">
+        <img src="static/@project.version@/img/big-ajax-loader.gif" alt="Loading..." />
+    </div>
+</div>

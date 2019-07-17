@@ -1,0 +1,10 @@
+
+<div  class="ui-grid-cell-contents es-grid-cell" id="{{row.entity.id}}">
+	<a  ng-href="{{row.entity.link}}" target="_blank" >
+    <span  data-ng-if="row.entity.title"  ng-class="{MASTER:'es-master-release', SUB:'es-sub-release'}[row.entity.release_type]"
+          class="release-title">
+    	{{row.entity.title}}
+    </span>
+    </a>
+</div>
+

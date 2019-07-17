@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <type-modification type="servicenow.CreateChangeRequest" label="ServiceNow: Create Change Request (ES)">
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true" hidden="true" />
+        <property name="scriptLocation" default="servicenow/CreateChangeRequest.py" hidden="true" />
+
+        <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+        <property name="implementationPlan" category="input" label="Implementation Plan" required="true" hidden="true" default="PFA"/>
+        <property name="backoutPlan"        category="input" label="Backout Plan" required="true" hidden="true" default="PFA" />
+        <property name="category" category="input" label="category_" required="false" hidden="true"/>
+        <property name="categorym" category="input" label="Category" required="true" default="Application Release"/>
+        <property name="configurationItem" category="input" label="Configuration Item" required="true" />
+        <property name="assignmentGroup" category="input" label="Assignment Group" required="true" />
+        <property name="assignTo" category="input" label="Assigned To" required="true" />
+        <property name="plannedStartDateTime" category="input" label="Planned Start Date/Time" description="yyyy-mm-dd HH:mm:ss" required="true" />
+        <property name="plannedEndDateTime" category="input" label="Planned End Date/Time" description="yyyy-mm-dd HH:mm:ss" required="true" />
+        <property name="environment" category="input" label="Environment" required="true" default="Production"/>
+        <property name="changeCoordinator" category="input" label="Change Approver" required="true" />
+        <property name="implementationPlan" category="input" label="Implementation Plan" required="true" default="PFA"/>
+        <property name="testPlan" category="input" label="Test Plan" required="true" default="PFA"/>
+        <property name="backoutPlan" category="input" label="Backout Plan" required="true" default="PFA"/>
+        <property name="changeType" category="input" label="Change Type" required="true" default="Normal"/>
+        <property name="changePlan" category="input" label="Change Plan" required="true"/>
+    </type-modification>
+    
+    <type type="servicenow.CreateChangeRequestV2" extends="servicenow.CreateTaskNew"
+          label="ServiceNow: Create Change Req V2 Test" virtual="false">
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true"
+                  hidden="true"/>
+        <property name="scriptLocation" default="servicenow/CreateChangeRequest2.py" hidden="true" />
+        <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+        <property name="implementationPlan" category="input" label="Implementation Plan" required="true" hidden="true" default="PFA"/>
+        <property name="backoutPlan"        category="input" label="Backout Plan" required="true" hidden="true" default="PFA" />
+        <property name="category" category="input" label="category_" required="false" hidden="true"/>
+        <property name="categorym" category="input" label="Category" required="true" default="Application Release"/>
+        <property name="configurationItem" category="input" label="Configuration Item" required="true" />
+        <property name="assignmentGroup" category="input" label="Assignment Group" required="true" />
+        <property name="assignTo" category="input" label="Assigned To" required="true" />
+        <property name="plannedStartDateTime" category="input" label="Planned Start Date/Time" description="yyyy-mm-dd HH:mm:ss" required="true" />
+        <property name="plannedEndDateTime" category="input" label="Planned End Date/Time" description="yyyy-mm-dd HH:mm:ss" required="true" />
+        <property name="environment" category="input" label="Environment" required="true" default="Production"/>
+        <property name="changeCoordinator" category="input" label="Change Approver" required="true" />
+        <property name="implementationPlan" category="input" label="Implementation Plan" required="true" default="PFA"/>
+        <property name="testPlan" category="input" label="Test Plan" required="true" default="PFA"/>
+        <property name="backoutPlan" category="input" label="Backout Plan" required="true" default="PFA"/>
+        <property name="changeType" category="input" label="Change Type" required="true" default="Normal"/>
+        <property name="changePlan" category="input" label="Change Plan" required="true"/>
+    </type>
+    
+    <type type="servicenow.CreateChangeRequestNative" extends="servicenow.CreateTaskNew"
+          label="ServiceNow: Create Change Req (Native)" virtual="false">
+        <property name="tableName" category="input" label="Table Name" default="change_request" required="true"
+                  hidden="true"/>
+    </type>
+
+    <type type="servicenow.ServiceNowReleaseAbortHook" extends="xlrelease.ExportHook">
+        <property name="servicenowServer" label="Server" referenced-type="servicenow.Server" kind="ci" />
+        <property name="sysId" label="SysID variable name" default="sysid" description="Name of the variable in release that holds sysid for the change request"/>
+        <property name="cancelStatus" label="Cancel Status" default="Cancelled" description="Cancelled status or numeric value if display values are not used as input"/>
+   </type>
+
+    <type type="servicenow.FindChangeTaskByField" extends="servicenow.FindRecordByTicket">
+        <property name="tableName" category="input" label="Table Name" default="change_task" required="true" hidden="true" />
+        <property name="scriptLocation" default="servicenow/FindChangeTaskByField.py" hidden="true" />
+        <property name="fieldName"  category="input" label="Field Name" required="true"/>
+        <property name="fieldValue" category="input" label="Field Value" required="true"/>
+        <property name="number" category="output" label="Task" />
+    </type>
+
+    <type-modification type="servicenow.FindChangeRequestByTicket">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <!-- type-modification type="servicenow.UpdateRecord">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification -->
+    <type-modification type="servicenow.FindRecordByTicket">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <type-modification type="servicenow.UpdateChangeRequest">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <type-modification type="servicenow.FindChangeTaskByTaskId">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <type-modification type="servicenow.PollingCheckStatus">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <type-modification type="servicenow.GetChangeRequest">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <type-modification type="servicenow.CheckChangeRequest">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+    <!-- type-modification type="servicenow.CreateTask">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification -->
+    <!-- type-modification type="servicenow.UpdateTask">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification -->
+    <type-modification type="servicenow.CheckStatus">
+         <property name="authToken" category="input" label="AuthToken" default="None" hidden="true"/>
+    </type-modification>
+</synthetic>
